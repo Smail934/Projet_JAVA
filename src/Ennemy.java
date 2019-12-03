@@ -1,114 +1,47 @@
+
 import java.sql.Time;
 
-public class Ennemy {
+public abstract class Ennemy {
 	protected double HP; // Le nombre de point de vie qu'ils ont. 
 	protected int PosX;
 	protected int PosY;
-	protected double Vitesse;
-	protected String Type;
+	protected String Nom;
 	protected int Direction;
-	protected int drop; // C'est l'or qu'ils vont fournir à chaque fois qu'ils mourront.  
-	protected int HPLoose; // Le nombre de vies qu'ils font perdre au joueur à chaque fois qu'ils atteignent le point B.
-	//protected boolean debuff; a mettre sur certain ennemy ( faibles/moyens)
-	protected boolean isUnderBuff;
+	protected boolean isUnderBuffer;
 	
-	public Ennemy(double hP, int posX, int posY, double vitesse, String type, int direction, int drop, int hPLoose) {
-		HP = hP;
-		PosX = posX;
-		PosY = posY;
-		Vitesse = vitesse;
-		Type = type;
-		Direction = direction;
-		this.drop = drop;
-		HPLoose = hPLoose;
+	public Ennemy() {}
+	
+	public abstract int getPosX();
+	public abstract void setPosX(int posx);
+	public abstract int getPosY();
+	public abstract void setPosY(int posy);
+	public abstract double getHP();
+	public abstract void setHP(double hp);
+	public abstract String getNom();
+	public abstract int getDirection();
+	public abstract void setDirection(int d);
+	public abstract int getDrop();
+	public abstract int getHPLoose();
+	public abstract boolean getIsUnderBuffer();
+	public abstract void setIsUnderBuffer(boolean b);
+	//public abstract double Vitesse();
+	
+	public void moveX(int x) {
+		PosX+=x;
 	}
-
-
-	public double getHP() {
-		return HP;
+	public void moveY(int y) {
+		PosY+=y;
 	}
-
-
-	public void setHP(double hP) {
-		HP = hP;
-	}
-
-
-	public int getPosX() {
-		return PosX;
-	}
-
-
-	public void setPosX(int posX) {
-		PosX = posX;
-	}
-
-
-	public int getPosY() {
-		return PosY;
-	}
-
-
-	public void setPosY(int posY) {
-		PosY = posY;
-	}
-
-
-	public double getVitesse() {
-		return Vitesse;
-	}
-
-
-	public void setVitesse(double vitesse) {
-		Vitesse = vitesse;
-	}
-
-
-	public String getType() {
-		return Type;
-	}
-
-
-	public void setType(String type) {
-		Type = type;
-	}
-
-
-	public int getDirection() {
-		return Direction;
-	}
-
-
-	public void setDirection(int direction) {
-		Direction = direction;
-	}
-
-
-	public int getDrop() {
-		return drop;
-	}
-
-
-	public void setDrop(int drop) {
-		this.drop = drop;
-	}
-
-
-	public int getHPLoose() {
-		return HPLoose;
-	}
-
-
-	public void setHPLoose(int hPLoose) {
-		HPLoose = hPLoose;
-	}
-
 	public boolean Malus() { // La vitesse des ennemies peut augmenter pendant un certain temps tout les 8 ennemis tuées.
 		if(Math.random()<0.15) {
 			return true;
 		}
 		return false;
 	}
+	public static void wait(int tps) {
+		try {Thread.sleep(1000 * tps);} catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+	}
+	
 	
 	//public void setUnderBuff(Boolean cond) 
 	
